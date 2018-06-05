@@ -342,7 +342,7 @@ BinarySearchTree.prototype.contains = function(value) {
   let doesContain = false;
   const node = this.root;
   function recursive(node, value) {
-    if (node === null) doesContain = false;
+    if (!node) doesContain = false;
     else if (value < node.value) return recursive(node.left, value);
     else if (value > node.value) return recursive(node.right, value);
     else  doesContain = true;
