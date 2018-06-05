@@ -220,8 +220,7 @@ BinarySearchTree.prototype.push = function(value) {
     } else recurse(tree.right, index);
   }
   ////////////////////push right index///////////
-  const index;
-  index = value < tree.value ?  -1 : 1;
+  let index = value < tree.value ?  -1 : 1;
   recurse(tree, index); //recurse(this);
 };
 ////////////////////end push///////////////////
