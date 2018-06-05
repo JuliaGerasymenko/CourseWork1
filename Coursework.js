@@ -48,7 +48,6 @@ const set = new Set([
   },
   {
     name: 'Kaspruk Nastia',
-    birth: new Date('2001-01-17'),
     group: 'IP-74',
     age: 17
   },
@@ -221,9 +220,8 @@ BinarySearchTree.prototype.push = function(value) {
     } else recurse(tree.right, index);
   }
   ////////////////////push right index///////////
-  let index;
-  if (value < tree.value) index = -1;
-  else index = 1;
+  const index;
+  index = value < tree.value ?  -1 : 1;
   recurse(tree, index); //recurse(this);
 };
 ////////////////////end push///////////////////
@@ -234,14 +232,14 @@ BinarySearchTree.prototype.rotation = function() {
   let leftIndex = 0;
   const rightIndex = 0;
   function recurseLeft(tree) {
-    if (tree !== null) {
+    if (tree) {
       recurseLeft(tree.left);
       leftIndex--;
       recurseLeft(tree.right);
     }
   }
   function recurseRight(tree, rightIndex) {
-    if (tree !== null) {
+    if (tree) {
       recurseRight(tree.left);
       rightIndex++;
       recurseRight(tree.right);
@@ -271,7 +269,8 @@ BinarySearchTree.prototype.doBalanced = function() {
   let leftIndex = 0;
   let rightIndex = 0;
   function recurseLeft(tree) {
-    if (tree !== null) {
+    //tree!==null
+    if (tree) {
       recurseLeft(tree.left);
       leftIndex--;
       recurseLeft(tree.right);
@@ -280,7 +279,7 @@ BinarySearchTree.prototype.doBalanced = function() {
   recurseLeft(root.left);
 
   function recurseRight(tree) {
-    if (tree !== null) {
+    if (tree) {
       recurseRight(tree.left);
       rightIndex++;
       recurseRight(tree.right);
