@@ -58,7 +58,7 @@ const set = new Set([
   {
     name: 'Kobrii Stepan',
     group: 'IP-74',
-    age: 21
+    age: 20
   },
   {
     name: 'Maksai Anna',
@@ -148,6 +148,7 @@ const set = new Set([
     age: 21
   }
 ]);
+
 ////LinkedList
 function ListForNode(data) {
   this.data = data;
@@ -173,22 +174,11 @@ List.prototype.add = function(value) {
   this.length++;
   return node;
 };
-List.prototype.printList = function() {
-  let current = this.head;
-  let index = this.length;
-  if (!index)  return 'nobody';
-  while (index !== 1) {
-    console.log(current.data);
-    current = current.next;
-    index--;
-  }
-  return current.data;
-};
-const list16 = new List();
-const list17 = new List();
-const list18 = new List();
-const list19 = new List();
-const list20 = new List();
+
+const mapAge = new Map();
+for (let i = 16; i < 21; i++){
+  mapAge.set(i, new List());
+}
 //////////////////end LinkedList///////////////////////
 //////////////////start Binary Search Tree///////////////
 function Node(value, index) {
@@ -355,7 +345,6 @@ BinarySearchTree.prototype.contains = function(value) {
     else  doesContain = true;
   }
   recursive(node, value);
-  //console.log(doesContain);//Содержит ли элемент
   return doesContain;
 };
 // /////////////////end contains///////////////////
@@ -380,61 +369,30 @@ set.forEach((value, set) => {
     console.log(bstAge.root);
     console.log(bstAge.doBalanced());
   }
-
-  switch (value.age) {
-    case 16:
-      list16.add(value.name);
-      break;
-    case 17:
-      list17.add(value.name);
-      break;
-    case 18:
-      list18.add(value.name);
-      break;
-    case 19:
-      list19.add(value.name);
-      break;
-    case 20:
-      list20.add(value.name);
-      break;
-  }
+ for(const [age, list] of mapAge){
+   if(value.age === age) list.add(value.name);
+ }
 });
 console.log('bstAge');
 console.log(bstAge.root);
 //////////group//////////////////
 console.log('\nWork with Groups\n');
-const listIp71 = new List();
-const listIp72 = new List();
-const listIp73 = new List();
-const listIp74 = new List();
-const bstGroup = new BinarySearchTree();
-//////////////////////////////////
+
+const mapGroup = new Map();
+mapGroup.set('IP-71', new List());
+mapGroup.set('IP-72', new List());
+mapGroup.set('IP-73', new List());
+mapGroup.set('IP-74', new List());
+ const bstGroup = new BinarySearchTree();
+// //////////////////////////////////
 set.forEach((value, set) => {
   if (!bstGroup.contains(value.group)) {
     bstGroup.push(value.group);
     bstGroup.doBalanced();
   }
-  switch (value.group) {
-    case 'IP-71':
-      listIp71.add(value.name);
-      break;
-    case 'IP-72':
-      listIp72.add(value.name);
-      break;
-    case 'IP-73':
-      listIp73.add(value.name);
-      break;
-    case 'IP-74':
-      listIp74.add(value.name);
-      break;
+  for(const [group, list] of mapGroup){
+  if(value.group === group) list.add(value.name);
   }
 });
 console.log('Group');
 console.dir(bstGroup.root);
-/////////////////////////////
-console.log('\n18 years old\n');
-console.log(list18.printList());
-console.log('\n16 years old\n');
-console.log(list16.printList());
-console.log('\nGroup IP_74\n');
-console.log(listIp74.printList());
