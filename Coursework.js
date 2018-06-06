@@ -367,8 +367,7 @@ console.dir(bstName.root);
 console.log('\nWork with Ages\n');
 const bstAge = new BinarySearchTree();
 set.forEach((value, set) => {
-  const temp = !bstAge.contains(value.age);
-  if (temp) {
+  if (!bstAge.contains(value.age)) {
     //console.log(value.age);
     bstAge.push(value.age);
     bstAge.doBalanced();
