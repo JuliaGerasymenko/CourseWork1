@@ -58,7 +58,7 @@ const set = new Set([
   {
     name: 'Kobrii Stepan',
     group: 'IP-74',
-    age: 18
+    age: 21
   },
   {
     name: 'Maksai Anna',
@@ -68,7 +68,7 @@ const set = new Set([
   {
     name: 'Mesheriakov Alexandriy',
     group: 'IP-74',
-    age: 18
+    age: 19
   },
   {
     name: 'Moroz Juriy',
@@ -145,7 +145,7 @@ const set = new Set([
   {
     name: 'Yashenko Illia',
     group: 'IP-74',
-    age: 18
+    age: 21
   }
 ]);
 ////LinkedList
@@ -220,7 +220,7 @@ BinarySearchTree.prototype.push = function(value) {
     } else recurse(tree.right, index);
   }
   ////////////////////push right index///////////
-  let index = value < tree.value ?  -1 : 1;
+  const index = value < tree.value ?  -1 : 1;
   recurse(tree, index); //recurse(this);
 };
 ////////////////////end push///////////////////
@@ -249,7 +249,7 @@ BinarySearchTree.prototype.rotation = function() {
   const difference =  leftIndex + rightIndex;
   if (difference === -2) {
     this.root = root.left;
-    root.left = null;
+    root.left = null;//удалить связь
     this.root.right = root;
     root.index = 1;
   } else if (difference === 2) {
@@ -287,6 +287,7 @@ BinarySearchTree.prototype.doBalanced = function() {
   recurseRight(root.right);
 
   function minimum(tree) {
+
     if (!tree || !tree.left) return tree;
     return minimum(tree.left);
   }
@@ -299,7 +300,7 @@ BinarySearchTree.prototype.doBalanced = function() {
   const difference =  leftIndex + rightIndex;
   const min = minimum(root.right);
   const max = maximum(root.left);
-
+  //const root = this.root;
   if (difference === -2) {
     this.root = max;
     if (root.left.right) {
@@ -327,10 +328,16 @@ BinarySearchTree.prototype.doBalanced = function() {
       } else if (!root.right.left.left.left.left) {
         root.right.left.left.left = min.right;
       }
+      console.log('this.root');
+      console.log(this.root);
       this.root.right = root.right;
+      console.log('this.root.right');
+      console.log(this.root.right);
     }
     root.right = null;
     this.root.left = root;
+    console.log('this.root.left');
+    console.log(this.root.left);
     this.root.index = 0;
     root.index = -1;
   }
@@ -370,7 +377,8 @@ set.forEach((value, set) => {
   if (!bstAge.contains(value.age)) {
     //console.log(value.age);
     bstAge.push(value.age);
-    bstAge.doBalanced();
+    console.log(bstAge.root);
+    console.log(bstAge.doBalanced());
   }
 
   switch (value.age) {
@@ -404,6 +412,7 @@ const bstGroup = new BinarySearchTree();
 set.forEach((value, set) => {
   if (!bstGroup.contains(value.group)) {
     bstGroup.push(value.group);
+    bstGroup.doBalanced();
   }
   switch (value.group) {
     case 'IP-71':
